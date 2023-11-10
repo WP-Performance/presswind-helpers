@@ -35,7 +35,7 @@ class PWConfig
         $default = file_get_contents(plugin_dir_path(__DIR__).self::$default_path
                                      .'default.json');
         // theme values
-        $global = file_get_contents(get_template_directory().self::$global_path.'/global.json');
+        $global = file_get_contents(get_stylesheet_directory().self::$global_path.'/global.json');
 
         // convert to array
         $default = json_decode($default, true);

@@ -39,7 +39,7 @@
 |
 */
 
-function get_template_directory(): string
+function get_stylesheet_directory(): string
 {
     return dirname(__DIR__);
 }

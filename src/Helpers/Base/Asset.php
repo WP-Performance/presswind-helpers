@@ -69,9 +69,9 @@ class Asset
      */
     protected function getVersion(): string
     {
-        $dir = get_template_directory();
+        $dir = get_stylesheet_directory();
         // determine path to file in server
-        $path = str_replace(get_template_directory_uri(), '', $this->src);
+        $path = str_replace(get_stylesheet_directory_uri(), '', $this->src);
         // get file path
         $file = $dir.$path;
         // if is dev localhost return time
