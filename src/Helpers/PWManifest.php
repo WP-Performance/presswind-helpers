@@ -74,7 +74,7 @@ class PWManifest
         $orderedWithToken = [];
         // add token
         foreach ($ordered['ordered'] as $key => $value) {
-            if (! $value) {
+            if (!$value) {
                 continue;
             }
             $orderedWithToken[$this->get_token_name($value->file)] = $value;

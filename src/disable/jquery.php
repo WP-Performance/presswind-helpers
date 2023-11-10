@@ -9,7 +9,7 @@ use PressWind\Helpers\PWConfig;
  */
 function removeJquery()
 {
-    if ($GLOBALS['pagenow'] !== 'wp-login.php' && ! is_admin() && ! is_user_logged_in()) {
+    if ($GLOBALS['pagenow'] !== 'wp-login.php' && !is_admin() && !is_user_logged_in()) {
         wp_deregister_script('jquery');
         wp_register_script('jquery', false);
     }
@@ -17,7 +17,7 @@ function removeJquery()
 
 function remove_jquery_migrate($scripts)
 {
-    if (! is_admin() && isset($scripts->registered['jquery'])) {
+    if (!is_admin() && isset($scripts->registered['jquery'])) {
         $script = $scripts->registered['jquery'];
 
         if ($script->deps) {

@@ -29,7 +29,7 @@ class Asset
      */
     public function __construct($handle, $src = '')
     {
-        if (! is_string($handle)) {
+        if (!is_string($handle)) {
             throw new \Exception('handle must be a string');
         }
 

@@ -53,12 +53,15 @@ class CSSAsset extends Asset
     {
         $handle = $this->handle;
         add_filter('style_loader_tag', function ($tag, $_handle) use ($handle) {
-            if (! str_contains($_handle, $handle) || ! $this->onload) {
+            if (!str_contains($_handle, $handle) || !$this->onload) {
                 return $tag;
             }
 
-            return str_replace(' media=', ' onload="this.media=\'all\'" media=',
-                $tag);
+            return str_replace(
+                ' media=',
+                ' onload="this.media=\'all\'" media=',
+                $tag
+            );
         }, 10, 3);
     }
 }

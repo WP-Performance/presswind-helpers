@@ -18,12 +18,16 @@ test('get token name', function () {
 
     $get_token_name = get_method(PWManifest::class, 'get_token_name');
 
-    $token = $get_token_name->invokeArgs(new PWManifest(),
-        [$manifest['8331d2aa']->file]);
+    $token = $get_token_name->invokeArgs(
+        new PWManifest(),
+        [$manifest['8331d2aa']->file]
+    );
     expect($token)->toBe('8331d2aa');
 
-    $token = $get_token_name->invokeArgs(new PWManifest(),
-        [$manifest['6fc5fb3f']->file]);
+    $token = $get_token_name->invokeArgs(
+        new PWManifest(),
+        [$manifest['6fc5fb3f']->file]
+    );
 
     expect($token)->toBe('6fc5fb3f');
 });
@@ -33,11 +37,15 @@ test('keep only entries', function () {
     $keep_entries = get_method(PWManifest::class, 'keep_entries');
     $get_file = get_file_method();
 
-    $manifest = $get_file->invokeArgs(new PWManifest(),
-        ['tests/']);
+    $manifest = $get_file->invokeArgs(
+        new PWManifest(),
+        ['tests/']
+    );
 
-    $cleaned = $keep_entries->invokeArgs(new PWManifest(),
-        [$manifest]);
+    $cleaned = $keep_entries->invokeArgs(
+        new PWManifest(),
+        [$manifest]
+    );
 
     foreach ($cleaned as $key => $value) {
         if (strpos($value->file, '.css') > 0) {
@@ -52,9 +60,13 @@ test('get legacy and polyfill', function () {
     $move_legacy_and_polyfill = get_method(PWManifest::class, 'move_legacy_and_polyfill');
     $get_file = get_file_method();
 
-    $results = $move_legacy_and_polyfill->invokeArgs(new PWManifest(),
-        [$get_file->invokeArgs(new PWManifest(),
-            ['tests/'])]);
+    $results = $move_legacy_and_polyfill->invokeArgs(
+        new PWManifest(),
+        [$get_file->invokeArgs(
+            new PWManifest(),
+            ['tests/']
+        )]
+    );
 
     expect(strpos($results['polyfill']->src, 'polyfills'))->not->toBeFalse();
     expect(strpos($results['polyfill']->src, 'legacy'))->not->toBeFalse();
@@ -67,11 +79,15 @@ test('order manifest', function () {
     $order_manifest = get_method(PWManifest::class, 'order_manifest');
     $get_file = get_file_method();
 
-    $manifest = $get_file->invokeArgs(new PWManifest(),
-        ['tests/']);
+    $manifest = $get_file->invokeArgs(
+        new PWManifest(),
+        ['tests/']
+    );
 
-    $results = $order_manifest->invokeArgs(new PWManifest(),
-        [$manifest]);
+    $results = $order_manifest->invokeArgs(
+        new PWManifest(),
+        [$manifest]
+    );
 
     foreach ($results as $key => $value) {
         if (strpos($value->file, '.css') > 0) {

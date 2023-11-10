@@ -48,9 +48,14 @@ class PWVite
      * @param  string  $position - front|admin|editor
      */
     public static function init(
-        int $port = 3000, string $path = '', string $position =
-    'front', bool $is_ts = false, $is_plugin = false, $slug = 'presswind-script')
-    {
+        int $port = 3000,
+        string $path = '',
+        string $position =
+    'front',
+        bool $is_ts = false,
+        $is_plugin = false,
+        $slug = 'presswind-script'
+    ) {
         return new self($port, $path, $position, $is_ts, $is_plugin, $slug);
     }
 
@@ -126,8 +131,10 @@ class PWVite
 
                 } else {
                     // Modern app.js module for modern browsers
-                    $asset = PWAsset::add($this->slug.'-'.$key,
-                        $this->getPath().$value->file)
+                    $asset = PWAsset::add(
+                        $this->slug.'-'.$key,
+                        $this->getPath().$value->file
+                    )
                         ->version($key)
                         ->inFooter()
                         ->module();

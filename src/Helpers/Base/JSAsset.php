@@ -120,7 +120,7 @@ class JSAsset extends Asset
         $handle = $this->handle;
         add_filter('script_loader_tag', function ($tag, $_handle) use ($handle) {
 
-            if (! str_contains($_handle, $handle)) {
+            if (!str_contains($_handle, $handle)) {
                 return $tag;
             }
             $type = $this->is_module ? 'module' : 'nomodule';
