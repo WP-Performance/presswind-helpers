@@ -5,9 +5,19 @@ namespace PressWind\Helpers;
 /**
  * Class PwConfig
  */
-class PwConfig
+class PWConfig
 {
-    private static ?PwConfig $instance = null;
+    private static ?PWConfig $instance = null;
+
+    /**
+     * @var string - path to global config
+     */
+    public static string $global_path = '/config';
+
+    /**
+     * @var string - path to default config
+     */
+    public static string $default_path = '/src';
 
     private static array $config = [];
 
@@ -22,9 +32,9 @@ class PwConfig
     private function init(): array
     {
         // default values
-        $default = file_get_contents(get_template_directory().'/src/default.json');
+        $default = file_get_contents(get_template_directory().self::$default_path.'/default.json');
         // theme values
-        $global = file_get_contents(get_template_directory().'/config/global.json');
+        $global = file_get_contents(get_template_directory().self::$global_path.'/global.json');
 
         // convert to array
         $default = json_decode($default, true);
