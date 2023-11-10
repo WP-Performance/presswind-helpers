@@ -5,9 +5,9 @@ your theme.
 
 ## PWVite
 
-@arg port
-@arg path - from your theme root
-@arg position front|admin|editor - default front
+@arg port  
+@arg path - from your theme root  
+@arg position front|admin|editor - default front  
 @arg is_ts - default false
 
 ```php
