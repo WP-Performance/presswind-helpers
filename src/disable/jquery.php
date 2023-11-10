@@ -28,7 +28,7 @@ function remove_jquery_migrate($scripts)
 
 function init_disable_jquery()
 {
-    if (PWConfig::get('disable.jquery')) {
+    if (PWConfig::get('disable.jquery') === true) {
         add_action('init', __NAMESPACE__.'\removeJquery');
         add_action('wp_default_scripts', __NAMESPACE__.'\remove_jquery_migrate');
     }
