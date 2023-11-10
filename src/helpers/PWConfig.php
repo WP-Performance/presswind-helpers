@@ -3,7 +3,7 @@
 namespace PressWind\Helpers;
 
 /**
- * Class PwConfig
+ * Class PWConfig
  */
 class PWConfig
 {
