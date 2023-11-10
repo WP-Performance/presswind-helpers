@@ -7,12 +7,12 @@ class PWManifest
     /**
      * @throws \Exception
      */
-    public static function get($path): array
+    public static function get($path, $is_plugin = false): array
     {
         $self = new self();
         // add trailing slash if not exist
         $path = str_ends_with($path, '/') ? $path : $path.'/';
-        $manifest = $self->get_file($path);
+        $manifest = $self->get_file($path, $is_plugin);
 
         return $self->order_manifest($manifest);
     }
@@ -25,10 +25,10 @@ class PWManifest
      *
      * @throws \Exception
      */
-    public function get_file(string $path = ''): object
+    public function get_file(string $path = '', bool $is_plugin = false): object
     {
         try {
-            $strJsonFileContents = file_get_contents(get_template_directory().'/'.$path.'dist/manifest.json');
+            $strJsonFileContents = file_get_contents(PWApp::get_working_path($is_plugin).'/'.$path.'dist/manifest.json');
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
@@ -96,7 +96,7 @@ class PWManifest
             // polyfill
             if (strpos($value->src, 'polyfills') > 0 && strpos($value->src, 'legacy') > 0) {
                 $polyfill = $value;
-                // legacy
+            // legacy
             } elseif (strpos($value->src, 'polyfills') === false && strpos($value->src, 'legacy') > 0) {
                 $legacy = $value;
             } else {

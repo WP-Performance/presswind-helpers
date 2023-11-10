@@ -5,15 +5,32 @@ your theme.
 
 ## PWVite
 
-@arg port  
-@arg path - from your theme root  
-@arg position front|admin|editor - default front  
-@arg is_ts - default false
+port - default 3000
+path - from your theme root  
+position front|admin|editor - default front  
+is_ts - default false
+is_plugin true|false - default false - for search assets in plugin folder
+instead of theme folder
+slug - handle - default presswind-script
 
 ```php
 use PressWind\Helpers\PWVite;
 
-PWVite::init(4444, 'admin', 'admin');
+// use with named parameters for more readability
+
+// in theme
+// 1 - search dist folder in root theme
+PWVite::init(port: 3000, path: '');
+
+// 2 - search admin/dist folder in root theme
+PWVite::init(port: 4444, path: 'admin', position: 'admin', is_ts: false);
+
+// in plugin
+
+// 3 - search dist folder in plugin test-plugin
+PWVite::init( port: 7777, path: 'test-plugin/', is_plugin: true, slug: 
+'plugin-test' );
+
 ```
 
 ## PWConfig

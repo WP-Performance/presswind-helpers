@@ -4,7 +4,7 @@ use PressWind\Helpers\PWManifest;
 
 function get_file_method(): ReflectionMethod
 {
-    return getMethod(PWManifest::class, 'get_file');
+    return get_method(PWManifest::class, 'get_file');
 }
 
 test('get manifest', function () {
@@ -16,7 +16,7 @@ test('get token name', function () {
 
     $manifest = PWManifest::get('tests/');
 
-    $get_token_name = getMethod(PWManifest::class, 'get_token_name');
+    $get_token_name = get_method(PWManifest::class, 'get_token_name');
 
     $token = $get_token_name->invokeArgs(new PWManifest(),
         [$manifest['8331d2aa']->file]);
@@ -30,7 +30,7 @@ test('get token name', function () {
 
 test('keep only entries', function () {
 
-    $keep_entries = getMethod(PWManifest::class, 'keep_entries');
+    $keep_entries = get_method(PWManifest::class, 'keep_entries');
     $get_file = get_file_method();
 
     $manifest = $get_file->invokeArgs(new PWManifest(),
@@ -49,7 +49,7 @@ test('keep only entries', function () {
 
 test('get legacy and polyfill', function () {
 
-    $move_legacy_and_polyfill = getMethod(PWManifest::class, 'move_legacy_and_polyfill');
+    $move_legacy_and_polyfill = get_method(PWManifest::class, 'move_legacy_and_polyfill');
     $get_file = get_file_method();
 
     $results = $move_legacy_and_polyfill->invokeArgs(new PWManifest(),
@@ -64,7 +64,7 @@ test('get legacy and polyfill', function () {
 
 test('order manifest', function () {
 
-    $order_manifest = getMethod(PWManifest::class, 'order_manifest');
+    $order_manifest = get_method(PWManifest::class, 'order_manifest');
     $get_file = get_file_method();
 
     $manifest = $get_file->invokeArgs(new PWManifest(),

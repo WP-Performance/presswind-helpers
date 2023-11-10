@@ -17,7 +17,7 @@ class PWConfig
     /**
      * @var string - path to default config
      */
-    public static string $default_path = '/src';
+    public static string $default_path = '';
 
     private static array $config = [];
 
@@ -32,7 +32,8 @@ class PWConfig
     private function init(): array
     {
         // default values
-        $default = file_get_contents(get_template_directory().self::$default_path.'/default.json');
+        $default = file_get_contents(plugin_dir_path(__DIR__).self::$default_path
+                                     .'default.json');
         // theme values
         $global = file_get_contents(get_template_directory().self::$global_path.'/global.json');
 

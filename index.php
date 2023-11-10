@@ -4,6 +4,8 @@ Plugin Name: PressWind
 Plugin URI:
 Description: PressWind Starter Theme helpers
 Version: 0.0.1
+Tested up to: 6.3
+Requires PHP: 8.1
 Author: Patrick Faramaz
 Author URI: https://wp-performance.com
 
@@ -28,3 +30,12 @@ if (! defined('ABSPATH')) {
 }
 
 require_once dirname(__FILE__).'/vendor/autoload.php';
+
+require_once dirname(__FILE__).'/src/disable/feed.php';
+require_once dirname(__FILE__).'/src/disable/comment.php';
+require_once dirname(__FILE__).'/src/disable/emoji.php';
+require_once dirname(__FILE__).'/src/disable/media.php';
+require_once dirname(__FILE__).'/src/disable/oembed.php';
+require_once dirname(__FILE__).'/src/disable/xmlrpc.php';
+require_once dirname(__FILE__).'/src/disable/rest_user.php';
+require_once dirname(__FILE__).'/src/disable/jquery.php';

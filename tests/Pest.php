@@ -44,7 +44,12 @@ function get_template_directory(): string
     return dirname(__DIR__);
 }
 
-function getMethod($classe, $method)
+function plugin_dir_path(): string
+{
+    return dirname(__DIR__);
+}
+
+function get_method($classe, $method)
 {
     $class = new ReflectionClass($classe);
 
