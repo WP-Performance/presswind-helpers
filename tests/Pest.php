@@ -12,6 +12,7 @@
 */
 
 // uses(Tests\TestCase::class)->in('Feature');
+
 function get_template_directory(): string
 {
     return dirname(__DIR__);
@@ -42,7 +43,9 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function getMethod($classe, $method)
 {
-    // ..
+    $class = new ReflectionClass($classe);
+
+    return $class->getMethod($method);
 }

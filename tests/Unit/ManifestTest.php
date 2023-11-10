@@ -2,6 +2,11 @@
 
 use PressWind\Helpers\PWManifest;
 
+function get_file_method(): ReflectionMethod
+{
+    return getMethod(PWManifest::class, 'get_file');
+}
+
 test('get manifest', function () {
     $manifest = PWManifest::get('tests/');
     expect($manifest['8331d2aa']->file)->toBe('assets/main-8331d2aa.js');
@@ -11,9 +16,7 @@ test('get token name', function () {
 
     $manifest = PWManifest::get('tests/');
 
-    $class = new ReflectionClass(PWManifest::class);
-    $get_token_name = $class->getMethod('get_token_name');
-    $get_token_name->setAccessible(true);
+    $get_token_name = getMethod(PWManifest::class, 'get_token_name');
 
     $token = $get_token_name->invokeArgs(new PWManifest(),
         [$manifest['8331d2aa']->file]);
@@ -21,16 +24,14 @@ test('get token name', function () {
 
     $token = $get_token_name->invokeArgs(new PWManifest(),
         [$manifest['6fc5fb3f']->file]);
+
     expect($token)->toBe('6fc5fb3f');
 });
 
 test('keep only entries', function () {
 
-    $class = new ReflectionClass(PWManifest::class);
-    $keep_entries = $class->getMethod('keep_entries');
-    $get_file = $class->getMethod('get_file');
-    $keep_entries->setAccessible(true);
-    $get_file->setAccessible(true);
+    $keep_entries = getMethod(PWManifest::class, 'keep_entries');
+    $get_file = get_file_method();
 
     $manifest = $get_file->invokeArgs(new PWManifest(),
         ['tests/']);
@@ -47,11 +48,9 @@ test('keep only entries', function () {
 });
 
 test('get legacy and polyfill', function () {
-    $class = new ReflectionClass(PWManifest::class);
-    $move_legacy_and_polyfill = $class->getMethod('move_legacy_and_polyfill');
-    $get_file = $class->getMethod('get_file');
-    $move_legacy_and_polyfill->setAccessible(true);
-    $get_file->setAccessible(true);
+
+    $move_legacy_and_polyfill = getMethod(PWManifest::class, 'move_legacy_and_polyfill');
+    $get_file = get_file_method();
 
     $results = $move_legacy_and_polyfill->invokeArgs(new PWManifest(),
         [$get_file->invokeArgs(new PWManifest(),
@@ -65,11 +64,8 @@ test('get legacy and polyfill', function () {
 
 test('order manifest', function () {
 
-    $class = new ReflectionClass(PWManifest::class);
-    $order_manifest = $class->getMethod('order_manifest');
-    $get_file = $class->getMethod('get_file');
-    $order_manifest->setAccessible(true);
-    $get_file->setAccessible(true);
+    $order_manifest = getMethod(PWManifest::class, 'order_manifest');
+    $get_file = get_file_method();
 
     $manifest = $get_file->invokeArgs(new PWManifest(),
         ['tests/']);
