@@ -7,12 +7,29 @@ class PWManifest
     /**
      * @throws \Exception
      */
-    public static function get($path, $is_plugin = false): array
+    public static function get($path, $is_plugin = false, bool $withObject =
+    false): array|object
     {
         $self = new self();
         // add trailing slash if not exist
         $path = str_ends_with($path, '/') ? $path : $path.'/';
-        $manifest = $self->get_file($path, $is_plugin);
+        if ($withObject) {
+            return [
+                'manifest' => $self->get_file($path, $is_plugin),
+                'self' => $self,
+            ];
+        }
+
+        return $self->get_file($path, $is_plugin);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public static function getOrdered($path, $is_plugin = false): array
+    {
+        ['manifest' => $manifest, 'self' => $self] = self::get($path,
+            $is_plugin, true);
 
         return $self->order_manifest($manifest);
     }
@@ -74,9 +91,15 @@ class PWManifest
         $orderedWithToken = [];
         // add token
         foreach ($ordered['ordered'] as $key => $value) {
-            if (!$value) {
+            if (! $value) {
                 continue;
             }
+            // add extension value
+            $ext = '';
+            if (property_exists($value, 'file')) {
+                $ext = pathinfo($value->file, PATHINFO_EXTENSION);
+            }
+            $value->ext = $ext;
             $orderedWithToken[$this->get_token_name($value->file)] = $value;
         }
 

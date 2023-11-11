@@ -8,13 +8,13 @@ function get_file_method(): ReflectionMethod
 }
 
 test('get manifest', function () {
-    $manifest = PWManifest::get('tests/');
+    $manifest = PWManifest::getOrdered('tests/');
     expect($manifest['8331d2aa']->file)->toBe('assets/main-8331d2aa.js');
 });
 
 test('get token name', function () {
 
-    $manifest = PWManifest::get('tests/');
+    $manifest = PWManifest::getOrdered('tests/');
 
     $get_token_name = get_method(PWManifest::class, 'get_token_name');
 

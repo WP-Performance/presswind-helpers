@@ -102,7 +102,7 @@ class PWVite
     private function set_script_prod(): void
     {
         // get manifest files list by order
-        $ordered = PWManifest::get($this->path, $this->is_plugin);
+        $ordered = PWManifest::getOrdered($this->path, $this->is_plugin);
         foreach ($ordered as $key => $value) {
             // if is css
             if (property_exists($value, 'css') === true || strpos($value->src, '.css') !== false) {
@@ -140,6 +140,28 @@ class PWVite
                         ->module();
                     $this->setPosition($asset);
                 }
+            }
+        }
+    }
+
+    public function setPreloadFont(): void
+    {
+        if (! PWApp::isDev()) {
+            $files = PWManifest::get($this->path, $this->is_plugin);
+            $t = '';
+            foreach ($files as $key => $value) {
+                // only fonts directory
+                if (str_contains($key, 'fonts') === false) {
+                    continue;
+                }
+                // get extension file
+                $ext = pathinfo($value->file, PATHINFO_EXTENSION);
+                $t .= '<link rel="preload" href="'.$this->getPath().$value->file.'" as="font" type="font/'.$ext.'" crossorigin />';
+            }
+            if ($t !== '') {
+                add_action('wp_head', function () use ($t) {
+                    echo $t;
+                }, 1);
             }
         }
     }
