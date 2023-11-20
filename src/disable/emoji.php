@@ -2,8 +2,6 @@
 
 namespace PressWind;
 
-use PressWind\Helpers\PWConfig;
-
 function init_disable_emoji()
 {
     if (PWConfig::get('disable.emoji')) {

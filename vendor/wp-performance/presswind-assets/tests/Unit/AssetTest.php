@@ -1,6 +1,6 @@
 <?php
 
-use PressWind\Helpers\PWAsset;
+use PressWind\PWAsset;
 
 test('is not css file', function () {
     $is_css = get_method(PWAsset::class, 'is_css');

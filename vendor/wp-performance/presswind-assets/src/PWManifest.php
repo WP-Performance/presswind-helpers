@@ -1,6 +1,6 @@
 <?php
 
-namespace PressWind\Helpers;
+namespace PressWind;
 
 class PWManifest
 {
@@ -12,7 +12,7 @@ class PWManifest
     {
         $self = new self();
         // add trailing slash if not exist
-        $path = str_ends_with($path, '/') ? $path : $path.'/';
+        $path = str_ends_with($path, '/') ? $path : $path . '/';
         if ($withObject) {
             return [
                 'manifest' => $self->get_file($path, $is_plugin),
@@ -28,8 +28,11 @@ class PWManifest
      */
     public static function getOrdered($path, $is_plugin = false): array
     {
-        ['manifest' => $manifest, 'self' => $self] = self::get($path,
-            $is_plugin, true);
+        ['manifest' => $manifest, 'self' => $self] = self::get(
+            $path,
+            $is_plugin,
+            true
+        );
 
         return $self->order_manifest($manifest);
     }
@@ -45,7 +48,7 @@ class PWManifest
     public function get_file(string $path = '', bool $is_plugin = false): object
     {
         try {
-            $strJsonFileContents = file_get_contents(PWApp::get_working_path($is_plugin).'/'.$path.'dist/manifest.json');
+            $strJsonFileContents = file_get_contents(PWApp::get_working_path($is_plugin) . '/' . $path . 'dist/manifest.json');
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
@@ -91,7 +94,7 @@ class PWManifest
         $orderedWithToken = [];
         // add token
         foreach ($ordered['ordered'] as $key => $value) {
-            if (! $value) {
+            if (!$value) {
                 continue;
             }
             // add extension value
@@ -119,7 +122,7 @@ class PWManifest
             // polyfill
             if (strpos($value->src, 'polyfills') > 0 && strpos($value->src, 'legacy') > 0) {
                 $polyfill = $value;
-            // legacy
+                // legacy
             } elseif (strpos($value->src, 'polyfills') === false && strpos($value->src, 'legacy') > 0) {
                 $legacy = $value;
             } else {

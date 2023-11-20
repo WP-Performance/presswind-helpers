@@ -1,9 +1,9 @@
 <?php
 
-namespace PressWind\Helpers;
+namespace PressWind;
 
-use PressWind\Helpers\Base\CSSAsset;
-use PressWind\Helpers\Base\JSAsset;
+use PressWind\Base\CSSAsset;
+use PressWind\Base\JSAsset;
 
 /**
  * Class PwAsset
@@ -19,7 +19,6 @@ class PWAsset
         $path = pathinfo($src);
 
         return $path['extension'] === 'css';
-
     }
 
     /**

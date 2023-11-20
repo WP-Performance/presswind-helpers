@@ -1,6 +1,6 @@
 <?php
 
-namespace PressWind\Helpers;
+namespace PressWind;
 
 /**
  * Class PWConfig
@@ -17,7 +17,7 @@ class PWConfig
     /**
      * @var string - path to default config
      */
-    public static string $default_path = '';
+    public static string $default_path = 'src/';
 
     private static array $config = [];
 
@@ -32,14 +32,14 @@ class PWConfig
     private function init(): array
     {
         // default values
-        $default = file_get_contents(plugin_dir_path(__DIR__).self::$default_path.'default.json');
+        $default = file_get_contents(plugin_dir_path(__DIR__) . self::$default_path . 'default.json');
         // convert to array
         $default = json_decode($default, true);
 
         $global = [];
         // theme values if exist
-        if(file_exists(get_stylesheet_directory().self::$global_path.'/global.json')) {
-            $global = file_get_contents(get_stylesheet_directory().self::$global_path.'/global.json');
+        if (file_exists(get_stylesheet_directory() . self::$global_path . '/global.json')) {
+            $global = file_get_contents(get_stylesheet_directory() . self::$global_path . '/global.json');
             $global = json_decode($global, true);
         }
 

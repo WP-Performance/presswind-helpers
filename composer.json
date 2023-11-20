@@ -11,12 +11,12 @@
       "email": "infos@goodmotion.fr"
     }
   ],
-  "require-dev": {
-    "pestphp/pest": "^2.24"
-  },
   "config": {
     "allow-plugins": {
       "pestphp/pest-plugin": true
     }
+  },
+  "require": {
+    "wp-performance/presswind-assets": "^0.0.1"
   }
 }

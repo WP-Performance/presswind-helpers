@@ -1,6 +1,6 @@
-## Plugin Presswind
+## Presswind Assets helpers for WordPress
 
-This plugin give you the ability to use methods of the Presswind directly in
+This code give you the ability to use methods of the Presswind directly in
 your theme.
 
 ## PWVite
@@ -33,14 +33,6 @@ PWVite::init( port: 7777, path: 'test-plugin/', is_plugin: true, slug:
 
 ```
 
-## PWConfig
-
-```php
-use PressWind\PWConfig;
-
-// get rss in array config.
-PWConfig::get('disable.rss');
-```
 
 ## PWAssets
 

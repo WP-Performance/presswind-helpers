@@ -2,8 +2,6 @@
 
 namespace PressWind;
 
-use PressWind\Helpers\PWConfig;
-
 function init_disable_media()
 {
     if (PWConfig::get('disable.media')) {

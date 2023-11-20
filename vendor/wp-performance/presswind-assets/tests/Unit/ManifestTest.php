@@ -1,6 +1,6 @@
 <?php
 
-use PressWind\Helpers\PWManifest;
+use PressWind\PWManifest;
 
 function get_file_method(): ReflectionMethod
 {

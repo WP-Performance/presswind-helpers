@@ -1,6 +1,6 @@
 <?php
 
-namespace PressWind\Helpers\Base;
+namespace PressWind\Base;
 
 class JSAsset extends Asset
 {
@@ -125,7 +125,7 @@ class JSAsset extends Asset
             }
             $type = $this->is_module ? 'module' : 'nomodule';
 
-            return str_replace(' src', ' type="'.$type.'" crossorigin src', $tag);
+            return str_replace(' src', ' type="' . $type . '" crossorigin src', $tag);
         }, 10, 3);
     }
 }

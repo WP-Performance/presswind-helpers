@@ -1,6 +1,6 @@
 <?php
 
-use PressWind\Helpers\PWConfig;
+use PressWind\PWConfig;
 
 PWConfig::$default_path = '/src/';
 PWConfig::$global_path = '/tests/dist';

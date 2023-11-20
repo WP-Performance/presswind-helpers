@@ -1,0 +1,22 @@
+{
+    "name": "wp-performance/presswind-assets",
+    "autoload": {
+        "psr-4": {
+            "PressWind\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "faramazpat",
+            "email": "infos@goodmotion.fr"
+        }
+    ],
+    "require-dev": {
+        "pestphp/pest": "^2.24"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}

@@ -1,6 +1,6 @@
 <?php
 
-namespace PressWind\Helpers\Base;
+namespace PressWind\Base;
 
 class CSSAsset extends Asset
 {

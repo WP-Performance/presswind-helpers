@@ -2,8 +2,6 @@
 
 namespace PressWind;
 
-use PressWind\Helpers\PWConfig;
-
 function init_disable_oembed()
 {
     if (PWConfig::get('disable.oembed')) {

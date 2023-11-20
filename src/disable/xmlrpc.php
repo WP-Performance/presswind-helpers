@@ -2,8 +2,6 @@
 
 namespace PressWind;
 
-use PressWind\Helpers\PWConfig;
-
 function init_disable_xmlrpc()
 {
     if (PWConfig::get('disable.xmlrpc')) {

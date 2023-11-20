@@ -3,7 +3,6 @@
 namespace PressWind;
 
 // Redirects all feeds to home page.
-use PressWind\Helpers\PWConfig;
 
 function disable_feeds_rss(): void
 {
