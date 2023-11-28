@@ -1,16 +1,31 @@
 {
     "name": "wp-performance/presswind-assets",
+    "description": "Assets helpers for use Vite JS in WordPress",
+    "keywords": [
+        "vite js",
+        "wordpress",
+        "wordpress plugin",
+        "wordpress theme",
+        "wordpress vite"
+    ],
+    "homepage": "https://wp-performance.com",
+    "authors": [
+        {
+            "name": "faramazpat",
+            "email": "infos@goodmotion.fr",
+            "homepage": "https://goodmotion.fr"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "~8.1.0 || ~8.2.0",
+        "ext-filter": "*"
+    },
     "autoload": {
         "psr-4": {
             "PressWind\\": "src/"
         }
     },
-    "authors": [
-        {
-            "name": "faramazpat",
-            "email": "infos@goodmotion.fr"
-        }
-    ],
     "require-dev": {
         "pestphp/pest": "^2.24"
     },

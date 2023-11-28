@@ -4,6 +4,17 @@ namespace PressWind;
 
 class PWManifest
 {
+    static public $vite_folder = '.vite';
+
+    /**
+     * check if vite version is 5 with .vite folder
+     */
+    private function hasDotVite($path): bool
+    {
+        return is_dir($path . '/' . self::$vite_folder);
+    }
+
+
     /**
      * @throws \Exception
      */
@@ -47,8 +58,15 @@ class PWManifest
      */
     public function get_file(string $path = '', bool $is_plugin = false): object
     {
+        $full_path = PWApp::get_working_path($is_plugin) . '/' . $path . 'dist/';
+
+        // if vite version 5
+        if ($this->hasDotVite($full_path)) {
+            $full_path .= self::$vite_folder . '/';
+        }
+
         try {
-            $strJsonFileContents = file_get_contents(PWApp::get_working_path($is_plugin) . '/' . $path . 'dist/manifest.json');
+            $strJsonFileContents = file_get_contents($full_path . 'manifest.json');
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }

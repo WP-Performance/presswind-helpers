@@ -1,22 +1,22 @@
 {
-  "name": "wp-performance/press-wind",
-  "autoload": {
-    "psr-4": {
-      "PressWind\\": "src/"
+    "name": "wp-performance/press-wind",
+    "autoload": {
+        "psr-4": {
+            "PressWind\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "faramazpat",
+            "email": "infos@goodmotion.fr"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "require": {
+        "wp-performance/presswind-assets": "^0.0.7"
     }
-  },
-  "authors": [
-    {
-      "name": "faramazpat",
-      "email": "infos@goodmotion.fr"
-    }
-  ],
-  "config": {
-    "allow-plugins": {
-      "pestphp/pest-plugin": true
-    }
-  },
-  "require": {
-    "wp-performance/presswind-assets": "^0.0.1"
-  }
 }

@@ -2,23 +2,27 @@
     "packages": [
         {
             "name": "wp-performance/presswind-assets",
-            "version": "0.0.1",
-            "version_normalized": "0.0.1.0",
+            "version": "0.0.7",
+            "version_normalized": "0.0.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WP-Performance/presswind-assets.git",
-                "reference": "69ac60a094fc1964497eae12fd8849973d020cf5"
+                "reference": "d525ef08b9b6d0c92e45463e6dbc9097a1cf0cce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WP-Performance/presswind-assets/zipball/69ac60a094fc1964497eae12fd8849973d020cf5",
-                "reference": "69ac60a094fc1964497eae12fd8849973d020cf5",
+                "url": "https://api.github.com/repos/WP-Performance/presswind-assets/zipball/d525ef08b9b6d0c92e45463e6dbc9097a1cf0cce",
+                "reference": "d525ef08b9b6d0c92e45463e6dbc9097a1cf0cce",
                 "shasum": ""
+            },
+            "require": {
+                "ext-filter": "*",
+                "php": "~8.1.0 || ~8.2.0"
             },
             "require-dev": {
                 "pestphp/pest": "^2.24"
             },
-            "time": "2023-11-20T15:45:55+00:00",
+            "time": "2023-11-28T14:19:39+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -27,15 +31,28 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
             "authors": [
                 {
                     "name": "faramazpat",
-                    "email": "infos@goodmotion.fr"
+                    "email": "infos@goodmotion.fr",
+                    "homepage": "https://goodmotion.fr"
                 }
+            ],
+            "description": "Assets helpers for use Vite JS in WordPress",
+            "homepage": "https://wp-performance.com",
+            "keywords": [
+                "vite js",
+                "wordpress",
+                "wordpress plugin",
+                "wordpress theme",
+                "wordpress vite"
             ],
             "support": {
                 "issues": "https://github.com/WP-Performance/presswind-assets/issues",
-                "source": "https://github.com/WP-Performance/presswind-assets/tree/0.0.1"
+                "source": "https://github.com/WP-Performance/presswind-assets/tree/0.0.7"
             },
             "install-path": "../wp-performance/presswind-assets"
         }

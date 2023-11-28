@@ -1,7 +1,10 @@
-## Presswind Assets helpers for WordPress
+## Presswind Vite JS Assets helpers for WordPress
 
 This code give you the ability to use methods of the Presswind directly in
-your theme.
+your theme for use Vite JS.
+
+Find the package on [Packagist](https://packagist.org/packages/wp-performance/presswind-assets)
+
 
 ## PWVite
 
@@ -33,6 +36,11 @@ PWVite::init( port: 7777, path: 'test-plugin/', is_plugin: true, slug:
 
 ```
 
+## Preload fonts
+
+```php
+PWVite::init()->setPreloadFont();
+```
 
 ## PWAssets
 

@@ -68,10 +68,19 @@ class PWVite
         }
     }
 
+
     private function set_script_dev(): void
     {
-        PWAsset::add('presswind-script-dev', 'https://localhost:' . $this->port . '/' . $this->get_relative_path_from() . $this->path . '/main' . ($this->is_ts ? '.ts' : '.js'))
-            ->inFooter()->module()->toFront();
+        $asset = PWAsset::add($this->slug, 'https://localhost:' . $this->port . '/' . $this->get_relative_path_from() . 'main' . ($this->is_ts ? '.ts' : '.js'))
+            ->inFooter()->module();
+
+        if ($this->position === 'admin') {
+            $asset->toBack();
+        } elseif ($this->position === 'editor') {
+            $asset->toBlock();
+        } else {
+            $asset->toFront();
+        }
     }
 
     /**
@@ -92,12 +101,11 @@ class PWVite
 
     private function getPath(): string
     {
-        // add slash start if not exist
-        $_path = str_starts_with($this->path, '/') ? $this->path : '/' . $this->path;
-        $_path = str_ends_with($_path, '/') ? $_path : $_path . '/';
+        $_path = PWHelpers::cleanPath($this->path);
 
         return PWApp::get_working_url($this->is_plugin) . $_path . self::$dist_path;
     }
+
 
     private function set_script_prod(): void
     {
@@ -105,10 +113,11 @@ class PWVite
         $ordered = PWManifest::getOrdered($this->path, $this->is_plugin);
         foreach ($ordered as $key => $value) {
             // if is css
-            if (property_exists($value, 'css') === true || strpos($value->src, '.css') !== false) {
+            // disable this condition: property_exists($value, 'css') === true ||
+            if (str_contains($value->src, '.css') !== false) {
                 $asset = PWAsset::add($this->slug . '-' . $key, $this->getPath() . $value->file)
-                    ->version($key)
-                    ->setOnLoad();
+                    ->version($key);
+                // ->setOnLoad();
                 $this->setPosition($asset);
 
                 // if is js
@@ -119,7 +128,7 @@ class PWVite
                         ->version($key)
                         ->inFooter()->nomodule();
                     $asset = $this->setPosition($asset);
-                    $asset->withInline(PWConfig::get('vite-js-inline'), 'before');
+                    $asset->withInline(self::getLegacyInline(), 'before');
                 } elseif (str_contains($value->file, 'legacy')) {
                     // Legacy app.js script for legacy browsers
                     $asset = PWAsset::add($this->slug . '-' . $key, $this->getPath() . $value->file)
@@ -173,15 +182,24 @@ class PWVite
 
             $content_dir = explode('/', WP_PLUGIN_DIR);
             $content_dir = end($content_dir);
-            $_path_ = explode($content_dir, plugin_dir_path(__DIR__) . $this->path);
+            $_path_ = explode($content_dir, plugin_dir_path(__DIR__) .  PWHelpers::cleanPath($this->path));
         } else {
             // get content dir name
             $content_dir = explode('/', WP_CONTENT_DIR);
             $content_dir = end($content_dir);
             // split path from content dir name
-            $_path_ = explode($content_dir, get_stylesheet_directory() . $this->path);
+            $_path_ = explode($content_dir, get_stylesheet_directory() . PWHelpers::cleanPath($this->path));
         }
 
         return count($_path_) > 0 ? $content_dir . $_path_[1] : '';
+    }
+
+
+    public static function getLegacyInline()
+    {
+        if (class_exists('PWConfig')) {
+            return PWConfig::get('vite-legacy-inline');
+        }
+        return "!function () { var e = document, t = e.createElement(\"script\"); if (!(\"noModule\" in t) && \"onbeforeload\" in t) {var n = !1;e.addEventListener(\"beforeload\", function (e) {if (e.target === t) n = !0; else if (!e.target.hasAttribute(\"nomodule\") ||!n) return;e.preventDefault()}, !0), t.type = \"module\", t.src = \".\", e.head.appendChild(t), t.remove()}}();";
     }
 }
