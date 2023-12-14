@@ -25,18 +25,8 @@ Author URI: https://wp-performance.com
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-
-if (!defined('ABSPATH')) {
+if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-require_once dirname(__FILE__) . '/vendor/autoload.php';
-
-require_once dirname(__FILE__) . '/src/disable/feed.php';
-require_once dirname(__FILE__) . '/src/disable/comment.php';
-require_once dirname(__FILE__) . '/src/disable/emoji.php';
-require_once dirname(__FILE__) . '/src/disable/media.php';
-require_once dirname(__FILE__) . '/src/disable/oembed.php';
-require_once dirname(__FILE__) . '/src/disable/xmlrpc.php';
-require_once dirname(__FILE__) . '/src/disable/rest_user.php';
-require_once dirname(__FILE__) . '/src/disable/jquery.php';
+require_once dirname(__FILE__).'/vendor/autoload.php';

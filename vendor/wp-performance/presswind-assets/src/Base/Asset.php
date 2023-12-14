@@ -29,7 +29,7 @@ class Asset
      */
     public function __construct($handle, $src = '')
     {
-        if (!is_string($handle)) {
+        if (! is_string($handle)) {
             throw new \Exception('handle must be a string');
         }
 
@@ -73,7 +73,7 @@ class Asset
         // determine path to file in server
         $path = str_replace(get_stylesheet_directory_uri(), '', $this->src);
         // get file path
-        $file = $dir . $path;
+        $file = $dir.$path;
         // if is dev localhost return time
         if (str_contains($file, 'localhost')) {
             return strtotime('now');

@@ -1,6 +1,6 @@
 ## Plugin Presswind
 
-This plugin give you the ability to use methods of the Presswind directly in
+This plugin give you the ability to use Vite JS directly in
 your theme.
 
 ## PWVite
@@ -14,32 +14,24 @@ instead of theme folder
 slug - handle - default presswind-script
 
 ```php
-use PressWind\PWVite;
-
+if (class_exists('PressWind\PWVite')) {
 // use with named parameters for more readability
 
 // in theme
 // 1 - search dist folder in root theme
-PWVite::init(port: 3000, path: '');
+\PressWind\PWVite::init(port: 3000, path: '');
 
 // 2 - search admin/dist folder in root theme
-PWVite::init(port: 4444, path: 'admin', position: 'admin', is_ts: false);
+\PressWind\PWVite::init(port: 4444, path: 'admin', position: 'admin', is_ts: false);
 
 // in plugin
 
 // 3 - search dist folder in plugin test-plugin
-PWVite::init( port: 7777, path: 'test-plugin/', is_plugin: true, slug:
+\PressWind\PWVite::init( port: 7777, path: 'test-plugin/', is_plugin: true, slug:
 'plugin-test' );
 
-```
+}
 
-## PWConfig
-
-```php
-use PressWind\PWConfig;
-
-// get rss in array config.
-PWConfig::get('disable.rss');
 ```
 
 ## PWAssets

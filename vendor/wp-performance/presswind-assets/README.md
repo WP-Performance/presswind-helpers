@@ -30,8 +30,8 @@ PWVite::init(port: 4444, path: 'admin', position: 'admin', is_ts: false);
 
 // in plugin
 
-// 3 - search dist folder in plugin test-plugin
-PWVite::init( port: 7777, path: 'test-plugin/', is_plugin: true, slug:
+// 3 - search dist folder in plugin test-plugin (from index.php root plugin)
+PWVite::init( port: 7777, path: 'test-plugin/', plugin_path: __FILE__, slug:
 'plugin-test' );
 
 ```

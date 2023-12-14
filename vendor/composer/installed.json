@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "wp-performance/presswind-assets",
-            "version": "0.0.7",
-            "version_normalized": "0.0.7.0",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WP-Performance/presswind-assets.git",
-                "reference": "d525ef08b9b6d0c92e45463e6dbc9097a1cf0cce"
+                "reference": "305a2f0700dc4f55f2e2c48cabdf036081748807"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WP-Performance/presswind-assets/zipball/d525ef08b9b6d0c92e45463e6dbc9097a1cf0cce",
-                "reference": "d525ef08b9b6d0c92e45463e6dbc9097a1cf0cce",
+                "url": "https://api.github.com/repos/WP-Performance/presswind-assets/zipball/305a2f0700dc4f55f2e2c48cabdf036081748807",
+                "reference": "305a2f0700dc4f55f2e2c48cabdf036081748807",
                 "shasum": ""
             },
             "require": {
@@ -22,7 +22,8 @@
             "require-dev": {
                 "pestphp/pest": "^2.24"
             },
-            "time": "2023-11-28T14:19:39+00:00",
+            "time": "2023-12-14T07:52:10+00:00",
+            "default-branch": true,
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -52,7 +53,7 @@
             ],
             "support": {
                 "issues": "https://github.com/WP-Performance/presswind-assets/issues",
-                "source": "https://github.com/WP-Performance/presswind-assets/tree/0.0.7"
+                "source": "https://github.com/WP-Performance/presswind-assets/tree/main"
             },
             "install-path": "../wp-performance/presswind-assets"
         }

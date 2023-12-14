@@ -4,16 +4,15 @@ namespace PressWind;
 
 class PWManifest
 {
-    static public $vite_folder = '.vite';
+    public static $vite_folder = '.vite';
 
     /**
      * check if vite version is 5 with .vite folder
      */
     private function hasDotVite($path): bool
     {
-        return is_dir($path . '/' . self::$vite_folder);
+        return is_dir($path.'/'.self::$vite_folder);
     }
-
 
     /**
      * @throws \Exception
@@ -23,7 +22,7 @@ class PWManifest
     {
         $self = new self();
         // add trailing slash if not exist
-        $path = str_ends_with($path, '/') ? $path : $path . '/';
+        $path = str_ends_with($path, '/') ? $path : $path.'/';
         if ($withObject) {
             return [
                 'manifest' => $self->get_file($path, $is_plugin),
@@ -58,15 +57,15 @@ class PWManifest
      */
     public function get_file(string $path = '', bool $is_plugin = false): object
     {
-        $full_path = PWApp::get_working_path($is_plugin) . '/' . $path . 'dist/';
+        $full_path = PWApp::get_working_path($is_plugin).'/'.$path.'dist/';
 
         // if vite version 5
         if ($this->hasDotVite($full_path)) {
-            $full_path .= self::$vite_folder . '/';
+            $full_path .= self::$vite_folder.'/';
         }
 
         try {
-            $strJsonFileContents = file_get_contents($full_path . 'manifest.json');
+            $strJsonFileContents = file_get_contents($full_path.'manifest.json');
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
@@ -112,7 +111,7 @@ class PWManifest
         $orderedWithToken = [];
         // add token
         foreach ($ordered['ordered'] as $key => $value) {
-            if (!$value) {
+            if (! $value) {
                 continue;
             }
             // add extension value
@@ -140,7 +139,7 @@ class PWManifest
             // polyfill
             if (strpos($value->src, 'polyfills') > 0 && strpos($value->src, 'legacy') > 0) {
                 $polyfill = $value;
-                // legacy
+            // legacy
             } elseif (strpos($value->src, 'polyfills') === false && strpos($value->src, 'legacy') > 0) {
                 $legacy = $value;
             } else {

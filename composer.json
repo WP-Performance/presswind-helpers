@@ -17,6 +17,6 @@
         }
     },
     "require": {
-        "wp-performance/presswind-assets": "^0.0.7"
+        "wp-performance/presswind-assets": "dev-main"
     }
 }
