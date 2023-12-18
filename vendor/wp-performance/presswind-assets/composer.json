@@ -27,11 +27,17 @@
         }
     },
     "require-dev": {
-        "pestphp/pest": "^2.24"
+        "pestphp/pest": "^2.24",
+        "tightenco/duster": "^2.7"
     },
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true
         }
+    },
+    "scripts": {
+        "test": "./vendor/bin/pest",
+        "lint": "./vendor/bin/duster lint",
+        "fix": "./vendor/bin/duster fix"
     }
 }
