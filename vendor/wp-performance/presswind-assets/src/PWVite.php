@@ -119,7 +119,7 @@ class PWVite
             $content_dir = end($content_dir);
             // split path from content dir name
             $_path_ = explode($content_dir, get_stylesheet_directory()
-                                            .PWHelpers::cleanPath($this->path, false));
+                                            .PWHelpers::cleanPath($this->path));
         }
 
         return count($_path_) > 0 ? $content_dir.$_path_[1] : '';
