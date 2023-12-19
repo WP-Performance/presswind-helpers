@@ -112,7 +112,7 @@ class PWVite
             // remove last slash
             $plugin_dir = PWHelpers::cleanPath($plugin_dir, false);
 
-            $_path_ = explode($content_dir, $plugin_dir.PWHelpers::cleanPath($this->path, false));
+            $_path_ = explode($content_dir, $plugin_dir.PWHelpers::cleanPath($this->path));
         } else {
             // get content dir name
             $content_dir = explode('/', WP_CONTENT_DIR);

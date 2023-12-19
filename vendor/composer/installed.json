@@ -7,12 +7,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WP-Performance/presswind-assets.git",
-                "reference": "2b322429b2b67546526cbef852e87b2aae86e3fe"
+                "reference": "2e1660ac7b1b3035b32d29340579edaa124b6633"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WP-Performance/presswind-assets/zipball/2b322429b2b67546526cbef852e87b2aae86e3fe",
-                "reference": "2b322429b2b67546526cbef852e87b2aae86e3fe",
+                "url": "https://api.github.com/repos/WP-Performance/presswind-assets/zipball/2e1660ac7b1b3035b32d29340579edaa124b6633",
+                "reference": "2e1660ac7b1b3035b32d29340579edaa124b6633",
                 "shasum": ""
             },
             "require": {
@@ -23,7 +23,7 @@
                 "pestphp/pest": "^2.24",
                 "tightenco/duster": "^2.7"
             },
-            "time": "2023-12-18T19:10:31+00:00",
+            "time": "2023-12-19T09:43:28+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",
