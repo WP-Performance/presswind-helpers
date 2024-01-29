@@ -133,7 +133,7 @@ class Asset
         // determine path to file in server
         $path = str_replace(get_stylesheet_directory_uri(), '', $this->src);
         // get file path
-        $file = $dir.$path;
+        $file = $dir . $path;
         // if is dev localhost return time
         if (str_contains($file, 'localhost')) {
             return strval(strtotime('now'));

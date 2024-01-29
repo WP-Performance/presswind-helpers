@@ -16,13 +16,13 @@ class ComposerStaticInit0e895c4cce9db96b0019f33db4b64344
 
     public static $prefixDirsPsr4 = [
         'PressWind\\' => [
-            0 => __DIR__.'/../..'.'/src',
-            1 => __DIR__.'/..'.'/wp-performance/presswind-assets/src',
+            0 => __DIR__ . '/../..' . '/src',
+            1 => __DIR__ . '/..' . '/wp-performance/presswind-assets/src',
         ],
     ];
 
     public static $classMap = [
-        'Composer\\InstalledVersions' => __DIR__.'/..'.'/composer/InstalledVersions.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     ];
 
     public static function getInitializer(ClassLoader $loader)

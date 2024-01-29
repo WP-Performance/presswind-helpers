@@ -172,11 +172,10 @@ class PWVite
     }
 
     private function set_script_prod(): void
-    {    // get manifest files list by order
+    {
+        // get manifest files list by order
         $ordered = PWManifest::getOrdered($this->path, $this->is_plugin);
-
         foreach ($ordered as $key => $value) {
-
             // if is .css in src or has css property
             if (str_contains($value->src, '.css') !== false || property_exists($value, 'css')) {
                 // if has css property
@@ -196,7 +195,6 @@ class PWVite
                     }
 
                 } else {
-
                     $asset = PWAsset::add($this->slug.'-'.$key, $this->getPath().$value->file)
                         ->version($key);
                     $this->setPosition($asset);
@@ -213,7 +211,8 @@ class PWVite
             }
 
             // if is js
-            if (str_contains($value->src, '.js') !== false || str_contains($value->src, '.ts') !== false) {
+            if (str_contains($value->src, '.js') !== false) {
+
                 if (str_contains($value->file, 'polyfills-legacy')) {
                     // Legacy nomodule polyfills for dynamic imports for older browsers
                     $asset = PWAsset::add($this->slug.'-'.$key, $this->getPath().$value->file)
