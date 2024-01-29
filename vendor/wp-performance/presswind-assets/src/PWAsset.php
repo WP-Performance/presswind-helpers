@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PressWind;
 
+use Exception;
 use PressWind\Base\CSSAsset;
 use PressWind\Base\JSAsset;
 
@@ -15,7 +16,7 @@ class PWAsset
     /**
      * Create new asset instance
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public static function add($handle, $src): CSSAsset|JSAsset
     {
@@ -25,8 +26,8 @@ class PWAsset
             } else {
                 return new JSAsset($handle, $src);
             }
-        } catch (\Exception $e) {
-            throw new \Exception($e->getMessage());
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
         }
     }
 

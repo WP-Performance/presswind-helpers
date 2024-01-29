@@ -19,13 +19,13 @@ test('get token name', function () {
     $get_token_name = get_method(PWManifest::class, 'get_token_name');
 
     $token = $get_token_name->invokeArgs(
-        new PWManifest(),
+        new PWManifest,
         [$manifest['8331d2aa']->file]
     );
     expect($token)->toBe('8331d2aa');
 
     $token = $get_token_name->invokeArgs(
-        new PWManifest(),
+        new PWManifest,
         [$manifest['6fc5fb3f']->file]
     );
 
@@ -38,12 +38,12 @@ test('keep only entries', function () {
     $get_file = get_file_method();
 
     $manifest = $get_file->invokeArgs(
-        new PWManifest(),
+        new PWManifest,
         ['tests/']
     );
 
     $cleaned = $keep_entries->invokeArgs(
-        new PWManifest(),
+        new PWManifest,
         [$manifest]
     );
 
@@ -61,9 +61,9 @@ test('get legacy and polyfill', function () {
     $get_file = get_file_method();
 
     $results = $move_legacy_and_polyfill->invokeArgs(
-        new PWManifest(),
+        new PWManifest,
         [$get_file->invokeArgs(
-            new PWManifest(),
+            new PWManifest,
             ['tests/']
         )]
     );
@@ -80,12 +80,12 @@ test('order manifest', function () {
     $get_file = get_file_method();
 
     $manifest = $get_file->invokeArgs(
-        new PWManifest(),
+        new PWManifest,
         ['tests/']
     );
 
     $results = $order_manifest->invokeArgs(
-        new PWManifest(),
+        new PWManifest,
         [$manifest]
     );
 

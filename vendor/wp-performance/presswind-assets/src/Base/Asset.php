@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PressWind\Base;
 
+use Exception;
+
 class Asset
 {
     /**
@@ -27,12 +29,12 @@ class Asset
     protected string $ver;
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function __construct($handle, $src = '')
     {
         if (! is_string($handle)) {
-            throw new \Exception('handle must be a string');
+            throw new Exception('handle must be a string');
         }
 
         $this->handle = $handle;

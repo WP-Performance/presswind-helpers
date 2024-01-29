@@ -11,12 +11,12 @@ class PWManifest
     public static $vite_folder = '.vite';
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public static function get($path, $is_plugin = false, bool $withObject =
     false): array|object
     {
-        $self = new self();
+        $self = new self;
         // add trailing slash if not exist
         $path = str_ends_with($path, '/') ? $path : $path.'/';
         if ($withObject) {
@@ -30,7 +30,7 @@ class PWManifest
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public static function getOrdered($path, $is_plugin = false): array
     {
@@ -49,7 +49,7 @@ class PWManifest
      * @param  string  $path - path to manifest file from root theme default:
      * dist/manifest.json
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function get_file(string $path = '', bool $is_plugin = false): object
     {

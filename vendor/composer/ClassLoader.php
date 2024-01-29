@@ -12,6 +12,9 @@
 
 namespace Composer\Autoload;
 
+use Closure;
+use InvalidArgumentException;
+
 /**
  * ClassLoader implements a PSR-0, PSR-4 and classmap class loader.
  *
@@ -43,8 +46,13 @@ namespace Composer\Autoload;
  */
 class ClassLoader
 {
-    /** @var \Closure(string):void */
+    /** @var Closure(string):void */
     private static $includeFile;
+
+    /**
+     * @var self[]
+     */
+    private static $registeredLoaders = [];
 
     /** @var ?string */
     private $vendorDir;
@@ -110,17 +118,44 @@ class ClassLoader
     private $apcuPrefix;
 
     /**
-     * @var self[]
-     */
-    private static $registeredLoaders = [];
-
-    /**
      * @param  ?string  $vendorDir
      */
     public function __construct($vendorDir = null)
     {
         $this->vendorDir = $vendorDir;
         self::initializeIncludeClosure();
+    }
+
+    /**
+     * Returns the currently registered loaders indexed by their corresponding vendor directories.
+     *
+     * @return self[]
+     */
+    public static function getRegisteredLoaders()
+    {
+        return self::$registeredLoaders;
+    }
+
+    /**
+     * @return void
+     */
+    private static function initializeIncludeClosure()
+    {
+        if (self::$includeFile !== null) {
+            return;
+        }
+
+        /**
+         * Scope isolated include.
+         *
+         * Prevents access to $this/self from included files.
+         *
+         * @param  string  $file
+         * @return void
+         */
+        self::$includeFile = Closure::bind(static function ($file) {
+            include $file;
+        }, null, null);
     }
 
     /**
@@ -246,7 +281,7 @@ class ClassLoader
      * @param  bool  $prepend Whether to prepend the directories
      * @return void
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function addPsr4($prefix, $paths, $prepend = false)
     {
@@ -267,7 +302,7 @@ class ClassLoader
             // Register directories for a new namespace.
             $length = strlen($prefix);
             if ($prefix[$length - 1] !== '\\') {
-                throw new \InvalidArgumentException('A non-empty PSR-4 prefix must end with a namespace separator.');
+                throw new InvalidArgumentException('A non-empty PSR-4 prefix must end with a namespace separator.');
             }
             $this->prefixLengthsPsr4[$prefix[0]][$prefix] = $length;
             $this->prefixDirsPsr4[$prefix] = (array) $paths;
@@ -311,7 +346,7 @@ class ClassLoader
      * @param  string[]|string  $paths  The PSR-4 base directories
      * @return void
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function setPsr4($prefix, $paths)
     {
@@ -320,7 +355,7 @@ class ClassLoader
         } else {
             $length = strlen($prefix);
             if ($prefix[$length - 1] !== '\\') {
-                throw new \InvalidArgumentException('A non-empty PSR-4 prefix must end with a namespace separator.');
+                throw new InvalidArgumentException('A non-empty PSR-4 prefix must end with a namespace separator.');
             }
             $this->prefixLengthsPsr4[$prefix[0]][$prefix] = $length;
             $this->prefixDirsPsr4[$prefix] = (array) $paths;
@@ -488,16 +523,6 @@ class ClassLoader
     }
 
     /**
-     * Returns the currently registered loaders indexed by their corresponding vendor directories.
-     *
-     * @return self[]
-     */
-    public static function getRegisteredLoaders()
-    {
-        return self::$registeredLoaders;
-    }
-
-    /**
      * @param  string  $class
      * @param  string  $ext
      * @return string|false
@@ -566,27 +591,5 @@ class ClassLoader
         }
 
         return false;
-    }
-
-    /**
-     * @return void
-     */
-    private static function initializeIncludeClosure()
-    {
-        if (self::$includeFile !== null) {
-            return;
-        }
-
-        /**
-         * Scope isolated include.
-         *
-         * Prevents access to $this/self from included files.
-         *
-         * @param  string  $file
-         * @return void
-         */
-        self::$includeFile = \Closure::bind(static function ($file) {
-            include $file;
-        }, null, null);
     }
 }
