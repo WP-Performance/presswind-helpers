@@ -8,13 +8,15 @@ Find the package on [Packagist](https://packagist.org/packages/wp-performance/pr
 
 ## PWVite
 
-port - default 3000
-path - from your theme root
-position front|admin|editor - default front
-is_ts - default false
-is_plugin true|false - default false - for search assets in plugin folder
-instead of theme folder
-slug - handle - default presswind-script
+port - default 3000  
+path - from your theme root  
+position front|admin|editor - default front  
+is_ts - default false  
+is_plugin true|false - default false - for search assets in plugin folder  
+instead of theme folder  
+slug - handle - default presswind-script  
+is_https - default true - for https or http  
+main_file - default main - file name without extension  
 
 ```php
 use PressWind\PWVite;

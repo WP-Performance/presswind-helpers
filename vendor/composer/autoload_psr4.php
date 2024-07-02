@@ -5,6 +5,6 @@
 $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
-return [
-    'PressWind\\' => [$baseDir . '/src', $vendorDir . '/wp-performance/presswind-assets/src'],
-];
+return array(
+    'PressWind\\' => array($baseDir . '/src', $vendorDir . '/wp-performance/presswind-assets/src'),
+);

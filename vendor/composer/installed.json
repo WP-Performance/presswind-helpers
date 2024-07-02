@@ -7,12 +7,12 @@
 			"source": {
 				"type": "git",
 				"url": "https://github.com/WP-Performance/presswind-assets.git",
-				"reference": "318b75d56e810c5d6387bb1138bfe836b1b09c2c"
+				"reference": "5065e297d9503cb52f8a4011496c032676f45c61"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/WP-Performance/presswind-assets/zipball/318b75d56e810c5d6387bb1138bfe836b1b09c2c",
-				"reference": "318b75d56e810c5d6387bb1138bfe836b1b09c2c",
+				"url": "https://api.github.com/repos/WP-Performance/presswind-assets/zipball/5065e297d9503cb52f8a4011496c032676f45c61",
+				"reference": "5065e297d9503cb52f8a4011496c032676f45c61",
 				"shasum": ""
 			},
 			"require": {
@@ -23,7 +23,7 @@
 				"pestphp/pest": "^2.24",
 				"tightenco/duster": "^2.7"
 			},
-			"time": "2023-12-19T09:48:32+00:00",
+			"time": "2024-01-31T09:03:58+00:00",
 			"default-branch": true,
 			"type": "library",
 			"installation-source": "dist",
@@ -33,7 +33,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "faramazpat",
@@ -52,7 +54,7 @@
 			],
 			"support": {
 				"issues": "https://github.com/WP-Performance/presswind-assets/issues",
-				"source": "https://github.com/WP-Performance/presswind-assets/tree/main"
+				"source": "https://github.com/WP-Performance/presswind-assets/tree/0.0.13"
 			},
 			"install-path": "../wp-performance/presswind-assets"
 		}

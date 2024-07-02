@@ -9,6 +9,10 @@ use PressWind\Base\JSAsset;
 
 class PWVite
 {
+	private bool $is_https = true;
+
+	private string $main_file = 'main';
+
     private static string $dist_path = 'dist/';
 
     private bool $is_plugin = false;
@@ -34,12 +38,15 @@ class PWVite
      * @param  string  $position - front|admin|editor
      */
     private function __construct(int $port, string $path, string $position =
-    'front', bool $is_ts = false, string|bool $plugin_path = false, string $slug = 'presswind-script')
+    'front', bool $is_ts = false, string|bool $plugin_path = false, string
+    $slug = 'presswind-script', $is_https = true, $main_file = 'main')
     {
         $this->port = $port;
         $this->path = $path;
         $this->is_ts = $is_ts;
         $this->position = $position;
+		$this->is_https = $is_https;
+		$this->main_file = $main_file;
         if ($plugin_path) {
             $this->is_plugin = true;
             $this->plugin_path = $plugin_path;
@@ -61,9 +68,11 @@ class PWVite
         'front',
         bool $is_ts = false,
         $plugin_path = false,
-        $slug = 'presswind-script'
+        $slug = 'presswind-script',
+	    $is_https = true,
+	    $main_file = 'main'
     ) {
-        return new self($port, $path, $position, $is_ts, $plugin_path, $slug);
+        return new self($port, $path, $position, $is_ts, $plugin_path, $slug, $is_https, $main_file);
     }
 
     public static function getLegacyInline()
@@ -77,7 +86,7 @@ class PWVite
 
     public function setPreloadFont(): void
     {
-        if (! PWApp::isDev()) {
+        if (!PWApp::isDev()) {
             $files = PWManifest::get($this->path, $this->is_plugin);
             $t = '';
             foreach ($files as $key => $value) {
@@ -87,7 +96,7 @@ class PWVite
                 }
                 // get extension file
                 $ext = pathinfo($value->file, PATHINFO_EXTENSION);
-                $t .= '<link rel="preload" href="' . $this->getPath() . $value->file . '" as="font" type="font/' . $ext . '" crossorigin />';
+                $t .= '<link rel="preload" href="'.$this->getPath().$value->file.'" as="font" type="font/'.$ext.'" crossorigin />';
             }
             if ($t !== '') {
                 add_action('wp_head', function () use ($t) {
@@ -100,29 +109,29 @@ class PWVite
     /**
      * get path after wp-content
      */
-    public function get_relative_path_from(): string
+    public function get_relative_path_from($with_path = true): string
     {
         if ($this->is_plugin) {
 
             $content_dir = explode('/', WP_PLUGIN_DIR);
             // get last two elements of array
-            $content_dir = $content_dir[count($content_dir) - 2] . '/' . end($content_dir);
+            $content_dir = $content_dir[count($content_dir) - 2].'/'.end($content_dir);
             // current plugin dir
             $plugin_dir = plugin_dir_path($this->plugin_path);
             // remove last slash
-            $plugin_dir = PWHelpers::cleanPath($plugin_dir, false);
+	        $plugin_dir = PWHelpers::cleanPath($plugin_dir, false);
 
-            $_path_ = explode($content_dir, $plugin_dir . PWHelpers::cleanPath($this->path));
+            $_path_ = explode($content_dir, $plugin_dir.($with_path ? PWHelpers::cleanPath($this->path) : ''));
         } else {
             // get content dir name
             $content_dir = explode('/', WP_CONTENT_DIR);
             $content_dir = end($content_dir);
             // split path from content dir name
             $_path_ = explode($content_dir, get_stylesheet_directory()
-                                            . PWHelpers::cleanPath($this->path));
+                                            .($with_path ? PWHelpers::cleanPath($this->path) : ''));
         }
 
-        return count($_path_) > 0 ? $content_dir . $_path_[1] : '';
+        return count($_path_) > 0 ? $content_dir.$_path_[1] : '';
     }
 
     private function set_script(): void
@@ -136,8 +145,7 @@ class PWVite
 
     private function set_script_dev(): void
     {
-        $asset = PWAsset::add($this->slug, 'https://localhost:' . $this->port . '/' . $this->get_relative_path_from() . 'main' . ($this->is_ts ? '.ts' : '.js'))
-            ->inFooter()->module();
+        $asset = PWAsset::add($this->slug, ($this->is_https ? 'https' : 'http') . '://localhost:' .$this->port .'/'.$this->get_relative_path_from().$this->main_file.($this->is_ts ? '.ts' : '.js'))->inFooter()->module();
 
         if ($this->position === 'admin') {
             $asset->toBack();
@@ -168,7 +176,10 @@ class PWVite
     {
         $_path = PWHelpers::cleanPath($this->path);
 
-        return PWApp::get_working_url($this->is_plugin) . $_path . self::$dist_path;
+	    return ($this->is_plugin ? PWHelpers::cleanPath
+		    ($this->get_relative_path_from(false), false) :
+			    PWApp::get_working_url(false)) . $_path . self::$dist_path;
+
     }
 
     private function set_script_prod(): void
@@ -181,27 +192,27 @@ class PWVite
                 // if has css property
                 if (property_exists($value, 'css')) {
                     foreach ($value->css as $k => $f) {
-                        $asset = PWAsset::add($this->slug . '-' . $k . '=' . $key, $this->getPath() . $f)
-                            ->version($k . '=' . $key);
+                        $asset = PWAsset::add($this->slug.'-'.$k.'='.$key, $this->getPath().$f)
+                                        ->version($k.'='.$key);
                         $this->setPosition($asset);
                     }
 
                     // add preload link
                     if ($this->position === 'front') {
-                        $t = '<link rel="preload" href="' . $this->getPath() . $f . '" as="style" crossorigin />';
+                        $t = '<link rel="preload" href="'.$this->getPath().$f.'" as="style" crossorigin />';
                         add_action('wp_head', function () use ($t) {
                             echo $t;
                         }, 1);
                     }
 
                 } else {
-                    $asset = PWAsset::add($this->slug . '-' . $key, $this->getPath() . $value->file)
-                        ->version($key);
+                    $asset = PWAsset::add($this->slug.'-'.$key, $this->getPath().$value->file)
+                                    ->version($key);
                     $this->setPosition($asset);
 
                     // add preload link
                     if ($this->position === 'front') {
-                        $t = '<link rel="preload" href="' . $this->getPath() . $value->file . '" as="style" crossorigin />';
+                        $t = '<link rel="preload" href="'.$this->getPath().$value->file.'" as="style" crossorigin />';
                         add_action('wp_head', function () use ($t) {
                             echo $t;
                         }, 1);
@@ -211,37 +222,37 @@ class PWVite
             }
 
             // if is js
-            if (str_contains($value->src, '.js') !== false) {
+            if (str_contains($value->src, '.js') !== false || str_contains($value->src, '.ts') !== false) {
 
                 if (str_contains($value->file, 'polyfills-legacy')) {
                     // Legacy nomodule polyfills for dynamic imports for older browsers
-                    $asset = PWAsset::add($this->slug . '-' . $key, $this->getPath() . $value->file)
-                        ->version($key)
-                        ->inFooter()->nomodule();
+                    $asset = PWAsset::add($this->slug.'-'.$key, $this->getPath().$value->file)
+                                    ->version($key)
+                                    ->inFooter()->nomodule();
                     $asset = $this->setPosition($asset);
                     $asset->withInline(self::getLegacyInline(), 'before');
                 } elseif (str_contains($value->file, 'legacy')) {
                     // Legacy app.js script for legacy browsers
-                    $asset = PWAsset::add($this->slug . '-' . $key, $this->getPath() . $value->file)
-                        ->version($key)
-                        ->inFooter()
-                        ->nomodule();
+                    $asset = PWAsset::add($this->slug.'-'.$key, $this->getPath().$value->file)
+                                    ->version($key)
+                                    ->inFooter()
+                                    ->nomodule();
                     $this->setPosition($asset);
                 } else {
                     // Modern app.js module for modern browsers
                     $asset = PWAsset::add(
-                        $this->slug . '-' . $key,
-                        $this->getPath() . $value->file
+                        $this->slug.'-'.$key,
+                        $this->getPath().$value->file
                     )
-                        ->version($key)
-                        ->inFooter()
-                        ->module();
+                                    ->version($key)
+                                    ->inFooter()
+                                    ->module();
                     $this->setPosition($asset);
 
                     // add preload link
                     if ($this->position === 'front') {
-                        $t = '<link rel="preload" href="' . $this->getPath() .
-                             $value->file . '" as="script" crossorigin />';
+                        $t = '<link rel="preload" href="'.$this->getPath().
+                             $value->file.'" as="script" crossorigin />';
                         add_action('wp_head', function () use ($t) {
                             echo $t;
                         }, 1);

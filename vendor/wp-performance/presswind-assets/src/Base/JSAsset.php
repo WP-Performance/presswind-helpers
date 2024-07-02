@@ -122,13 +122,19 @@ class JSAsset extends Asset
         $handle = $this->handle;
         add_filter('script_loader_tag', function ($tag, $_handle) use ($handle) {
 
-            if (! str_contains($_handle, $handle)) {
+            if (!str_contains($_handle, $handle)) {
                 return $tag;
             }
 
             $type = $this->is_module ? 'module' : 'nomodule';
 
-            return str_replace('<script ', '<script type="' . $type . '" crossorigin ', $tag);
+	        // if tag not contains type="module". Bug introduced in WP 6.4.3 ??
+	        if (str_contains($tag, 'type="module"') === false) {
+		        return str_replace('<script ', '<script type="' . $type . '" ', $tag);
+	        }
+
+	        return $tag;
+
         }, 10, 3);
     }
 }

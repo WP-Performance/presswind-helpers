@@ -1,5 +1,5 @@
 {
-    "name": "wp-performance/press-wind",
+    "name": "wp-performance/press-wind-helpers",
     "autoload": {
         "psr-4": {
             "PressWind\\": "src/"
