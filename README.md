@@ -1,4 +1,4 @@
-## Plugin Presswind
+## Presswind Helpers
 
 This plugin give you the ability to use Vite JS directly in
 your theme.
@@ -88,3 +88,7 @@ PWAsset::add('my-js', get_template_directory_uri().'/assets/js/app.js')
     ->inFooter()
     ->toBlock();
 ```
+
+## License
+
+PressWind Helper is released under the terms of the GNU General Public License version 2 or (at your option) any later version. See [LICENSE.md](LICENSE.md) for complete license.
