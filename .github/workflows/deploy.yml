@@ -50,10 +50,10 @@ jobs:
 
     # Optional: If your plugin is using composer dependencies, we want to include them
     # WITHOUT the dev dependencies.
-    - name: Build
-      run: |
-        npm install
-        npm run build
+    # - name: Build
+    #   run: |
+    #     npm install
+    #     npm run build
     - name: WordPress Plugin Deploy
 
       # You can add unique ids to specific steps if you want to reference their output later in the workflow.
