@@ -5,13 +5,12 @@ your theme.
 
 ## PWVite
 
-port - default 3000
-path - from your theme root
-position front|admin|editor - default front
-is_ts - default false
-is_plugin true|false - default false - for search assets in plugin folder
-instead of theme folder
-slug - handle - default presswind-script
+- port - default 3000  
+- path - from your theme root
+- position front|admin|editor - default front
+- is_ts - default false
+- is_plugin true|false - default false - for search assets in plugin folder instead of theme folder
+- slug - handle - default presswind-script
 
 ```php
 if (class_exists('PressWind\PWVite')) {
