@@ -3,9 +3,18 @@
 This plugin give you the ability to use Vite JS directly in
 your theme.
 
+You can use this plugin with the starter theme **Press-wind**:
+<https://github.com/WP-Performance/press-wind>
+
+## Steps to Use
+
+1. Install the **presswind-helpers** plugin.
+2. Install the **Press-wind** theme.
+3. Start coding!
+
 ## PWVite
 
-- port - default 3000  
+- port - default 3000
 - path - from your theme root
 - position front|admin|editor - default front
 - is_ts - default false

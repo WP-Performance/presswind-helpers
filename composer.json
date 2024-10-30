@@ -1,22 +1,30 @@
 {
-    "name": "wp-performance/press-wind-helpers",
-    "autoload": {
-        "psr-4": {
-            "PressWind\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "faramazpat",
-            "email": "infos@goodmotion.fr"
-        }
-    ],
-    "config": {
-        "allow-plugins": {
-            "pestphp/pest-plugin": true
-        }
-    },
-    "require": {
-        "wp-performance/presswind-assets": "dev-main"
+  "name": "wp-performance/press-wind-helpers",
+  "description": "Helpers plugin for use with press-wind theme",
+  "type": "wordpress-plugin",
+  "homepage": "https://github.com/WP-Performance/press-wind-helpers",
+  "keywords": [
+    "wordpress",
+    "plugin"
+  ],
+  "autoload": {
+    "psr-4": {
+      "PressWind\\": "src/"
     }
+  },
+  "authors": [
+    {
+      "name": "faramazpat",
+      "email": "infos@goodmotion.fr"
+    }
+  ],
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  },
+  "require": {
+    "php": ">=8.0",
+    "wp-performance/presswind-assets": "dev-main"
+  }
 }
